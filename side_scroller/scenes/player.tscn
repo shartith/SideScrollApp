@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://blru8rngpu4jl"]
+
+[ext_resource type="Texture2D" uid="uid://buld2oeaon20g" path="res://side_scroller/art/sprites/knight.png" id="1_g63fb"]
+
+[node name="Player" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+texture = ExtResource("1_g63fb")
+hframes = 8
+vframes = 8
