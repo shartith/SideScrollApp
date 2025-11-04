@@ -1,0 +1,92 @@
+[gd_scene load_steps=11 format=3 uid="uid://skp0ax2fvwpy"]
+
+[ext_resource type="Texture2D" uid="uid://c0jds0f7sh2qb" path="res://side_scroller/art/sprites/run2.png" id="1_cxh6r"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4kqtf"]
+radius = 12.0
+height = 72.0
+
+[sub_resource type="Animation" id="Animation_jg5ri"]
+resource_name = "run"
+length = 1.7
+loop_mode = 1
+step = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+}
+
+[sub_resource type="Animation" id="Animation_6naf7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xdym4"]
+_data = {
+&"RESET": SubResource("Animation_6naf7"),
+&"run": SubResource("Animation_jg5ri")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_occkp"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6nlsj"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_yn3e5"]
+states/run/node = SubResource("AnimationNodeAnimation_occkp")
+states/run/position = Vector2(404, 106)
+transitions = ["Start", "run", SubResource("AnimationNodeStateMachineTransition_6nlsj")]
+graph_offset = Vector2(-439, -118)
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_06w7r"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_sbp6h"]
+graph_offset = Vector2(-840, -159)
+nodes/output/position = Vector2(460, 160)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_yn3e5")
+nodes/StateMachine/position = Vector2(-40, 160)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_06w7r")
+nodes/TimeScale/position = Vector2(220, 160)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"StateMachine"]
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8, -64)
+texture = ExtResource("1_cxh6r")
+hframes = 8
+vframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -36)
+shape = SubResource("CapsuleShape2D_4kqtf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xdym4")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_sbp6h")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 4.0
