@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://b72krfde33vdf"]
+[gd_scene load_steps=6 format=4 uid="uid://b72krfde33vdf"]
 
 [ext_resource type="Texture2D" uid="uid://bq3yes1mibexq" path="res://side_scroller/art/sprites/world_tileset.png" id="1_8n105"]
 [ext_resource type="PackedScene" uid="uid://blru8rngpu4jl" path="res://side_scroller/scenes/player.tscn" id="1_m0w3v"]
+[ext_resource type="PackedScene" uid="uid://skp0ax2fvwpy" path="res://side_scroller/scenes/player_new.tscn" id="3_0d73u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0d73u"]
 texture = ExtResource("1_8n105")
@@ -173,3 +174,6 @@ tile_set = SubResource("TileSet_pj1pt")
 position = Vector2(161, 113)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Player2" parent="." instance=ExtResource("3_0d73u")]
+position = Vector2(205, 159)
