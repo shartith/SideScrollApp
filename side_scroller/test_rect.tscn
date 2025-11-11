@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cens3wito2mlq"]
+
+[sub_resource type="Gradient" id="Gradient_fadjp"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vfipl"]
+gradient = SubResource("Gradient_fadjp")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ecc3x"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 94.0
+offset_top = 12.0
+offset_right = 350.0
+offset_bottom = 52.0
+texture = SubResource("GradientTexture1D_vfipl")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+offset_left = 95.0
+offset_top = 75.0
+offset_right = 351.0
+offset_bottom = 115.0
+texture = SubResource("PlaceholderTexture2D_ecc3x")
